@@ -7,3 +7,10 @@ Spec::Rake::SpecTask.new(:spec) do |spec|
 end
 
 task :default => :spec
+require 'rake/testtask'
+Rake::TestTask.new(:test) do |t|
+  t.libs << 'lib'
+  t.libs << 'test'
+  t.pattern = 'spec/**/*_test.rb'
+  t.verbose = true
+end
