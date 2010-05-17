@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+  include Houdini::Model
+  
   houdini :moderates_image,
     :on => :after_create,
     :if => :image_updated?,
