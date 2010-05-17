@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :houdini_postbacks,
+  map.resources :postbacks,
+    :name_prefix => 'houdini_',
     :controller => 'houdini/postbacks',
     :only => [:create],
-    :path_prefix => ":subject_class/:subject_id/:task_name" 
+    :path_prefix => "houdini/:subject_class/:subject_id/:task_name" 
 end
