@@ -5,20 +5,14 @@ class Post < ActiveRecord::Base
     :on => :after_create,
     :if => :image_updated?,
     :title => 'Review Image',
-    :form_html => :generate_houdini_html,
-    :callback => :houdini_callback
+    :form_template => File.join(RAILS_ROOT, 'app/views/posts/houdini_template.html.haml')
   
   def image_updated?
     true
   end
   
-  def generate_houdini_html
-    template = File.read(File.join(RAILS_ROOT, 'app/views/posts/houdini_template.html.haml'))
-    haml_engine = Haml::Engine.new(template)
-    haml_engine.render(Object.new, :image_url => image_url)
-  end
-  
-  def houdini_callback(answer)
+  # Might not want to move it here if we want to support multiple houdinis in one model
+  def process_houdini_answer(answer)
     update_attribute(:flagged, true) if answer[:flagged] == 'yes'
   end
 end
