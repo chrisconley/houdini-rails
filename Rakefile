@@ -6,7 +6,6 @@ Spec::Rake::SpecTask.new(:spec) do |spec|
   spec.spec_files = FileList['spec/**/*_spec.rb']
 end
 
-task :default => :spec
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
@@ -14,3 +13,5 @@ Rake::TestTask.new(:test) do |t|
   t.pattern = 'spec/**/*_test.rb'
   t.verbose = true
 end
+
+task :default => [:spec, :test]
