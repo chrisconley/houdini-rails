@@ -22,6 +22,7 @@ module Houdini
     end
 
     def process_houdini_answer(answer)
+      #TODO: add #update_attributes as default if no callback is specfied
       self.send self.class.houdini_task.callback, answer
     end
     
