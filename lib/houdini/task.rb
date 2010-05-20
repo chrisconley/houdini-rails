@@ -1,6 +1,6 @@
 module Houdini
   class Task
-    attr_accessor :name, :on, :if, :title, :form_html, :callback
+    attr_accessor :name, :on, :if, :title, :form_template, :callback
   
   
     def initialize(name, options)
@@ -8,7 +8,7 @@ module Houdini
       @on = options[:on]
       @if = options[:if]
       @title = options[:title]
-      @form_html = options[:form_html]
+      @form_template = options[:form_template]
       @callback = options[:callback]
     end
   end

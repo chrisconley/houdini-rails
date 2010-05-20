@@ -4,18 +4,12 @@ class Post < ActiveRecord::Base
   houdini :moderates_image,
     :on => :after_create,
     :if => :image_updated?,
-    :title => 'Review Image',
-    :form_html => :generate_houdini_html,
+    :title => 'Moderate Image',
+    :form_template => File.join(RAILS_ROOT, 'app/views/posts/houdini_template.html.haml'),
     :callback => :houdini_callback
   
   def image_updated?
     true
-  end
-  
-  def generate_houdini_html
-    template = File.read(File.join(RAILS_ROOT, 'app/views/posts/houdini_template.html.haml'))
-    haml_engine = Haml::Engine.new(template)
-    haml_engine.render(Object.new, :image_url => image_url)
   end
   
   def houdini_callback(answer)
