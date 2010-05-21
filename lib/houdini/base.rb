@@ -1,9 +1,14 @@
 module Houdini
   class Base
-    def self.request(params)
+    Undefined = Class.new(NameError)
+    HoudiniRequestError = Class.new(NameError)
+    
+    def self.request(api, params)
       validate_constants
-      url = URI.parse("http://#{HOST}/image_review/tasks/")
+      url = URI.parse("http://#{HOST}/#{api}/tasks/")
       response, body = Net::HTTP.post_form(url, params)
+      raise HoudiniRequestError, "The request to houdini failed with code #{response.code}: #{body}" if response.code != "200"
+      [response.code, body]
     end
     
     private
@@ -15,5 +20,5 @@ module Houdini
     end
   end
   
-  Undefined = Class.new(NameError)
+  
 end
