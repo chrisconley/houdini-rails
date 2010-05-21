@@ -8,7 +8,7 @@ describe Houdini::PostbacksController do
   before do
     @subject = mock_model(Foo)
     Foo.stub!(:find).and_return(@subject)
-    @subject.stub!(:process_houdini_answer)
+    @subject.stub!(:process_postback)
   end
   
   def do_post
@@ -21,7 +21,7 @@ describe Houdini::PostbacksController do
   end
   
   it "should process the answer" do
-    @subject.should_receive(:process_houdini_answer)
+    @subject.should_receive(:process_postback)
     do_post
   end
 end

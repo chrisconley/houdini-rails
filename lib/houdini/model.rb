@@ -15,18 +15,23 @@ module Houdini
     end
 
     def send_to_houdini
-      Houdini::Core.send(houdini_task.name,
+      result = Houdini::Core.send(houdini_task.name,
         :title => houdini_task.title,
         :form_html => generate_form_html(houdini_task.form_template),
         :postback_url => houdini_postbacks_url(self.class.name, self.id, self.houdini_task.name, :host => Houdini::RAILS_HOST))
+      call_on_submit(*result)
     end
 
-    def process_houdini_answer(answer)
-      #TODO: add #update_attributes as default if no callback is specfied
-      self.send self.class.houdini_task.callback, answer
+    def process_postback(answer)
+      self.send(houdini_task.on_postback, answer)
+    end
+    
+    def call_on_submit(response, body)
+      self.send(houdini_task.on_submit, response, body) if houdini_task.on_submit
     end
     
     def generate_form_html(template)
+      #TODO: look into including Rails::Renderer
       template = File.read(template)
       haml_engine = Haml::Engine.new(template)
       haml_engine.render(Object.new, self.class.name.underscore => self)
