@@ -3,7 +3,7 @@ require 'uri'
 
 module Houdini
   class Core
-    def self.moderates_image(params)
+    def self.request(params)
       validate_constants
       url = URI.parse("http://#{HOST}/image_review/tasks/")
       response, body = Net::HTTP.post_form(url, params)

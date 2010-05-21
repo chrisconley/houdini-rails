@@ -15,7 +15,7 @@ module Houdini
     end
 
     def send_to_houdini
-      result = Houdini::Core.send(houdini_task.name,
+      result = Houdini::Core.request(
         :title => houdini_task.title,
         :form_html => generate_form_html(houdini_task.form_template),
         :postback_url => houdini_postbacks_url(self.class.name, self.id, self.houdini_task.name, :host => Houdini::RAILS_HOST))
