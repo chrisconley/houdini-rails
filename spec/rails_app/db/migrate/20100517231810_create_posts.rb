@@ -4,6 +4,7 @@ class CreatePosts < ActiveRecord::Migration
       t.string :title
       t.text :image_url
       t.boolean :flagged
+      t.datetime :houdini_request_sent_at
 
       t.timestamps
     end

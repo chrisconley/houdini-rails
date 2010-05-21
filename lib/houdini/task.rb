@@ -1,6 +1,5 @@
 module Houdini
   class Task
-    #include ActiveModel::Validations
     attr_accessor :name, :on, :if, :title, :form_template, :on_submit, :on_postback
   
     def initialize(name, options)

@@ -6,5 +6,6 @@ class PostbacksTest < ActionController::IntegrationTest
     visit 'houdini/post/1/review_image/postbacks', :post, :answer => {:flagged => "yes"}
     assert_response :success
     assert_equal true, post.reload.flagged
+    assert_equal Time.now.to_date, post.houdini_request_sent_at.to_date
   end
 end
