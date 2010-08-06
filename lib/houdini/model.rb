@@ -6,11 +6,9 @@ module Houdini
 
     module ClassMethods
       def houdini(name, options)
-        #TODO: Validate options
         include ActionController::UrlWriter
         cattr_accessor :houdini_task
         self.houdini_task = Houdini::Task.new(name, options)
-        self.send(houdini_task.on, :send_to_houdini, :if => houdini_task.if)
       end
     end
 

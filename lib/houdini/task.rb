@@ -7,7 +7,7 @@ module Houdini
       @api = "simple" # options[:strategy]
       @on = options[:on] || :after_create
       @if = options[:if] || true
-      @identifier = options[:identifier]
+      @identifier = options[:identifier] || name
       @price = options[:price]
       @title = options[:title]
       @form_template = options[:form_template]
