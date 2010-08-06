@@ -10,12 +10,15 @@ module Houdini
         include ActionController::UrlWriter
         cattr_accessor :houdini_task
         self.houdini_task = Houdini::Task.new(name, options)
-        self.send(houdini_task.on, :send_to_houdini, :if => houdini_task.if) 
+        self.send(houdini_task.on, :send_to_houdini, :if => houdini_task.if)
       end
     end
 
     def send_to_houdini
       result = Houdini::Base.request(houdini_task.api,
+        :api_key => Houdini::KEY,
+        :identifier => houdini_task.identifier,
+        :price => houdini_task.price,
         :title => houdini_task.title,
         :form_html => generate_form_html(houdini_task.form_template),
         :postback_url => houdini_postbacks_url(self.class.name, self.id, self.houdini_task.name, :host => Houdini::RAILS_HOST))
@@ -25,11 +28,11 @@ module Houdini
     def process_postback(answer)
       self.send(houdini_task.on_postback, answer)
     end
-    
+
     def call_on_submit(response, body)
       self.send(houdini_task.on_submit, response, body) if houdini_task.on_submit
     end
-    
+
     def generate_form_html(template)
       #TODO: look into including Rails::Renderer
       template = File.read(template)

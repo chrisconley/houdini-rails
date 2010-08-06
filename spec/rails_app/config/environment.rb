@@ -11,13 +11,13 @@ class TestGemLocator < Rails::Plugin::Locator
     Rails::Plugin.new(File.join(File.dirname(__FILE__), *%w(.. .. ..)))
   end
 end
- 
+
 Rails::Initializer.run do |config|
   config.gem 'haml'
   config.time_zone = 'UTC'
   config.plugin_locators << TestGemLocator
 end
 
-Houdini::KEY = 'abcde'
-Houdini::HOST = 'staging.gohoudini.com'
+Houdini::KEY = 'sandbox'
+Houdini::HOST = 'houdini-sandbox.heroku.com'
 Houdini::RAILS_HOST = 'localhost:3000'
