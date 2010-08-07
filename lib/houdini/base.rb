@@ -7,7 +7,6 @@ module Houdini
       validate_constants
       return ["200", '{success:"true"}'] if HOST == 'test'
       url = URI.parse("http://#{HOST}/api/v0/#{api}/tasks/")
-      puts url.inspect
       response, body = Net::HTTP.post_form(url, params)
       raise HoudiniRequestError, "The request to houdini failed with code #{response.code}: #{body}" if response.code != "200"
       [response.code, body]
