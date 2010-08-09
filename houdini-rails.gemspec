@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{houdini-rails}
-  s.version = "0.1.4"
+  s.version = "0.1.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chris Conley"]
-  s.date = %q{2010-08-07}
+  s.date = %q{2010-08-09}
   s.description = %q{Rails plugin for interacting with the Houdini Mechanical Turk API}
   s.email = %q{chris@chrisconley.me}
   s.extra_rdoc_files = [
@@ -24,10 +24,10 @@ Gem::Specification.new do |s|
      "app/controllers/houdini/postbacks_controller.rb",
      "config/routes.rb",
      "houdini-rails.gemspec",
-     "lib/houdini.rb",
-     "lib/houdini/base.rb",
-     "lib/houdini/model.rb",
-     "lib/houdini/task.rb",
+     "lib/houdini-rails.rb",
+     "lib/houdini-rails/base.rb",
+     "lib/houdini-rails/model.rb",
+     "lib/houdini-rails/task.rb",
      "rails/init.rb",
      "spec/controllers/houdini/postbacks_controller_spec.rb",
      "spec/integration/postbacks_test.rb",
