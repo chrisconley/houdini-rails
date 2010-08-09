@@ -1,1 +1,1 @@
-require 'houdini'
+require 'houdini-rails'
