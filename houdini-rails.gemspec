@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{houdini-rails}
-  s.version = "0.1.5"
+  s.version = "0.1.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chris Conley"]
-  s.date = %q{2010-08-09}
-  s.description = %q{Rails plugin for interacting with the Houdini Mechanical Turk API}
+  s.date = %q{2010-08-16}
+  s.description = %q{Rails engine for interacting with the Houdini Mechanical Turk API}
   s.email = %q{chris@chrisconley.me}
   s.extra_rdoc_files = [
     "README"
@@ -31,12 +31,13 @@ Gem::Specification.new do |s|
      "rails/init.rb",
      "spec/controllers/houdini/postbacks_controller_spec.rb",
      "spec/integration/postbacks_test.rb",
+     "spec/lib/base_spec.rb",
      "spec/rails_app/README",
      "spec/rails_app/Rakefile",
      "spec/rails_app/app/controllers/application_controller.rb",
      "spec/rails_app/app/helpers/application_helper.rb",
      "spec/rails_app/app/models/post.rb",
-     "spec/rails_app/app/views/posts/houdini_template.html.haml",
+     "spec/rails_app/app/views/posts/houdini_template.html.erb",
      "spec/rails_app/config/boot.rb",
      "spec/rails_app/config/database.yml",
      "spec/rails_app/config/environment.rb",
@@ -53,9 +54,6 @@ Gem::Specification.new do |s|
      "spec/rails_app/db/migrate/20100517231810_create_posts.rb",
      "spec/rails_app/db/seeds.rb",
      "spec/rails_app/doc/README_FOR_APP",
-     "spec/rails_app/log/development.log",
-     "spec/rails_app/log/production.log",
-     "spec/rails_app/log/server.log",
      "spec/rails_app/public/404.html",
      "spec/rails_app/public/422.html",
      "spec/rails_app/public/500.html",
@@ -87,10 +85,11 @@ Gem::Specification.new do |s|
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.6}
-  s.summary = %q{Rails plugin for interacting with the Houdini Mechanical Turk API}
+  s.summary = %q{Rails engine for interacting with the Houdini Mechanical Turk API}
   s.test_files = [
     "spec/controllers/houdini/postbacks_controller_spec.rb",
      "spec/integration/postbacks_test.rb",
+     "spec/lib/base_spec.rb",
      "spec/rails_app/app/controllers/application_controller.rb",
      "spec/rails_app/app/helpers/application_helper.rb",
      "spec/rails_app/app/models/post.rb",
@@ -117,11 +116,14 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<spec>, [">= 1.3.0"])
+      s.add_runtime_dependency(%q<tilt>, [">= 1.0.1"])
     else
       s.add_dependency(%q<spec>, [">= 1.3.0"])
+      s.add_dependency(%q<tilt>, [">= 1.0.1"])
     end
   else
     s.add_dependency(%q<spec>, [">= 1.3.0"])
+    s.add_dependency(%q<tilt>, [">= 1.0.1"])
   end
 end
 
