@@ -1,8 +1,8 @@
 class Houdini::PostbacksController < ApplicationController
   def create
-    subject_class = params[:subject_class].classify.constantize
-    subject = subject_class.find(params[:subject_id])
-    if subject.process_postback(params[:answer])
+    object_class = params[:object_class].classify.constantize
+    object = object_class.find(params[:object_id])
+    if object.process_postback(request.request_parameters)
       render :json => {:success => true}
     else
       render :json => {:success => false}, :status => 422

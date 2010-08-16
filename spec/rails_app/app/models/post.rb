@@ -1,25 +1,24 @@
 class Post < ActiveRecord::Base
   include Houdini::Model
 
-  houdini :moderates_image,
-    :identifier => 'image_moderation',
+  houdini :image_moderation,
     :title => 'Moderate Image',
-    :form_template => File.join(RAILS_ROOT, 'app/views/posts/houdini_template.html.erb'),
-    :on_submit => :update_houdini_attributes,
-    :on_postback => :process_image_moderation_answer,
+    :form_template => 'app/views/posts/houdini_template.html.erb',
+    :after_submit => :update_houdini_attributes,
+    :on_task_completion => :process_image_moderation_answer,
     :price => '0.01'
 
   after_create :moderate_image, :if => :image_url
 
   def moderate_image
-    send_to_houdini
+    Houdini.perform!(:image_moderation, self)
   end
 
-  def update_houdini_attributes(response, body)
+  def update_houdini_attributes
     update_attribute(:houdini_request_sent_at, Time.now)
   end
 
-  def process_image_moderation_answer(answer)
-    update_attribute(:flagged, true) if answer[:flagged] == 'yes'
+  def process_image_moderation_answer(params)
+    update_attribute(:flagged, true) if params[:flagged] == 'yes'
   end
 end

@@ -3,5 +3,5 @@ ActionController::Routing::Routes.draw do |map|
     :name_prefix => 'houdini_',
     :controller => 'houdini/postbacks',
     :only => [:create],
-    :path_prefix => "houdini/:subject_class/:subject_id/:task_name" 
+    :path_prefix => "houdini/:object_class/:object_id/:task_name" 
 end

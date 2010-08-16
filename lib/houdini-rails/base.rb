@@ -1,15 +1,21 @@
 module Houdini
-  class Base
-    Undefined = Class.new(NameError)
-    HoudiniRequestError = Class.new(NameError)
+  Undefined = Class.new(NameError)
+  RequestError = Class.new(NameError)
+  AuthenticationError = Class.new(NameError)
 
+  class Base
     def self.request(api, params)
       validate_constants
       return ["200", '{success:"true"}'] if HOST == 'test'
       url = URI.parse("http://#{HOST}/api/v0/#{api}/tasks/")
       response, body = Net::HTTP.post_form(url, params)
-      raise HoudiniRequestError, "The request to houdini failed with code #{response.code}: #{body}" if response.code != "200"
-      [response.code, body]
+
+      raise(AuthenticationError, "invalid api key") if response.code == '403'
+      if response.code != "200"
+        raise RequestError, "The request to houdini failed with code #{response.code}: #{body}"
+      end
+
+      [response, body]
     end
 
     private
