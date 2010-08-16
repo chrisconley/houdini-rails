@@ -13,7 +13,6 @@ class TestGemLocator < Rails::Plugin::Locator
 end
 
 Rails::Initializer.run do |config|
-  config.gem 'haml'
   config.time_zone = 'UTC'
   config.plugin_locators << TestGemLocator
 end

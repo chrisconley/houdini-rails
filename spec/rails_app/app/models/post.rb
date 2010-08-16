@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   houdini :moderates_image,
     :identifier => 'image_moderation',
     :title => 'Moderate Image',
-    :form_template => File.join(RAILS_ROOT, 'app/views/posts/houdini_template.html.haml'),
+    :form_template => File.join(RAILS_ROOT, 'app/views/posts/houdini_template.html.erb'),
     :on_submit => :update_houdini_attributes,
     :on_postback => :process_image_moderation_answer,
     :price => '0.01'

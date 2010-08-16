@@ -33,7 +33,7 @@ module Houdini
 
     def generate_form_html(template)
       template = Tilt.new(template)
-      template.render(self, self.class.name.downcase => self)
+      template.render(self, self.class.name.downcase.to_sym => self)
     end
   end
 end
