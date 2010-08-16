@@ -32,10 +32,8 @@ module Houdini
     end
 
     def generate_form_html(template)
-      #TODO: look into including Rails::Renderer
-      template = File.read(template)
-      haml_engine = Haml::Engine.new(template)
-      haml_engine.render(Object.new, self.class.name.underscore => self)
+      template = Tilt.new(template)
+      template.render(self, self.class.name.downcase => self)
     end
   end
 end
