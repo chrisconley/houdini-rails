@@ -12,25 +12,6 @@ Add the gem to your config/environment.rb
 
 # Example Usage
 
-Create a template for the form to be sent to Mechanical Turk:
-
-    <!--app/views/houdini_templates/post.html.erb -->
-
-    <h2>Review the image for offensiveness</h2>
-
-    <h3>Instructions</h3>
-    <p>Please review the image below.</p>
-
-    <img src="<%= post.image_url %>"><br/>
-
-    <input type="radio" name="flagged" value="yes" class="required">
-      Yes, this picture is offensive
-    </input>
-
-    <input type="radio" name="flagged" value="no" class="required">
-      No, this picture is okay
-    </input>
-
 Setup Houdini in your ActiveRecord model:
 
     class Post < ActiveRecord::Base
@@ -52,6 +33,25 @@ Setup Houdini in your ActiveRecord model:
         update_attribute(:flagged => params[:flagged])
       end
     end
+    
+Create a template for the form to be sent to Mechanical Turk:
+
+    <!--app/views/houdini_templates/post.html.erb -->
+
+    <h2>Review the image for offensiveness</h2>
+
+    <h3>Instructions</h3>
+    <p>Please review the image below.</p>
+
+    <img src="<%= post.image_url %>"><br/>
+
+    <input type="radio" name="flagged" value="yes" class="required">
+      Yes, this picture is offensive
+    </input>
+
+    <input type="radio" name="flagged" value="no" class="required">
+      No, this picture is okay
+    </input>
 
 Post.houdini class method options:
 
