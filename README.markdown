@@ -2,7 +2,7 @@
 
 This ruby gem is a Rails Engine for using the Houdini Mechanical Turk API. It provides easy integration into your models and sets up the necessary controllers to receive answers posted back to your app from Houdini.
 
-Check out the [Houdini Documentation](http://houdinihq.com/documentation) for more info.
+Check out the [Houdini Documentation](http://houdinihq.com/documentation) for more info about the API.
 
 # Installation (Rails 2.3.x)
 
