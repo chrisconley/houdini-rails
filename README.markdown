@@ -1,16 +1,18 @@
-Houdini Rails Engine
-=======
+# Overview
 
-Installation (Rails 2.3.x)
-----------------
+This ruby gem is a Rails Engine for using the Houdini Mechanical Turk API. It provides easy integration into your models and sets up the necessary controllers to receive answers posted back to your app from Houdini.
+
+Houdini Documentation: http://houdinihq.com/documentation
+
+# Installation (Rails 2.3.x)
 
 Add the gem to your config/environment.rb
+
     config.gem 'houdini-rails'
 
-Example Usage
----------------
+# Example Usage
 
-Create a template:
+Create a template for the form to be sent to Mechanical Turk:
 
     <!--app/views/houdini_templates/post.html.erb -->
 
@@ -22,11 +24,11 @@ Create a template:
     <img src="<%= post.image_url %>"><br/>
 
     <input type="radio" name="flagged" value="yes" class="required">
-    Yes, this picture is offensive
+      Yes, this picture is offensive
     </input>
 
     <input type="radio" name="flagged" value="no" class="required">
-    No, this picture is okay
+      No, this picture is okay
     </input>
 
 Setup Houdini in your ActiveRecord model:
@@ -50,3 +52,10 @@ Setup Houdini in your ActiveRecord model:
         update_attribute(:flagged => params[:flagged])
       end
     end
+
+Post.houdini class method options:
+
+* :price - Amount in cents you want to pay for the task to be completed
+* :title - Title that Mechanical Turk workers will see when browsing/searching available tasks
+* :form_template - ERB or HAML template used to render the form html.
+* :on_task_completion - Method that Houdini should call when the answer is posted back to your app. The results of your form will be passed into the method as the only parameter. `{:flagged => 'yes'}` in the example above.
