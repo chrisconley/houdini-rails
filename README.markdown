@@ -6,9 +6,17 @@ Check out the [Houdini Documentation](http://houdinihq.com/documentation) for mo
 
 # Installation (Rails 2.3.x)
 
-Add the gem to your config/environment.rb
+Add the gem to your config/environment.rb and setup a few constants
 
     config.gem 'houdini-rails'
+
+    config.after_initialize do
+      ::Houdini::KEY = 'YOUR_API_KEY'
+      ::Houdini::HOST = 'houdinihq.com' # or 'houdini-sandbox.heroku.com' for testing
+      ::Houdini::RAILS_HOST = 'your_app_domain.com'
+    end
+
+You may want to configure Houdini differently for each of you environments.
 
 # Example Usage
 
@@ -33,7 +41,7 @@ Setup Houdini in your ActiveRecord model:
         update_attribute(:flagged => params[:flagged])
       end
     end
-    
+
 Create a template for the form to be sent to Mechanical Turk:
 
     <!--app/views/houdini_templates/post.html.erb -->
